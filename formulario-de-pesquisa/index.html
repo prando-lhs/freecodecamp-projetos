@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"   content="width=device-width, initial-scale=1.0">
+        <title>Formulário de Pesquisa</title>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <h1 id="title">Formulário de Pesquisa</h1>
+        <p id="description">Seja bem-vindo ao meu formulario de pesquisa para meu projeto do FreeCodeCamp</p>
+        
+        <form id="survey-form">
+            <label for="name" id="name-label">Nome:</label><br>
+                <input type="text" id="name" placeholder="Nome completo" required><br>
+                
+            <label for="email" id="email-label">E-mail:</label><br>
+                <input type="email" id="email" placeholder="example@example.com" required><br>
+
+            <label for="numero" id="number-label">Idade:</label>
+                <input type="number" id="number" min="16" max="90" placeholder="Sua idade deve ser entre 16 e 90 anos" required><br>
+
+            <label for="genero" id="gender-label">Gênero:</label><br>
+
+                <input type="radio" id="masculino" name="genero" value="masculino" required>
+                <label for="masculino">Masculino</label><br>
+
+                <input type="radio" id="feminino" name="genero" value="feminino" required>
+
+                <label for="feminino">Feminino</label><br>
+
+                <input type="radio" id="outro" name="genero" value="outro" required>
+
+                <label for="outro">Outro</label><br>
+
+            <label for="estado" id="dropdown-label">Estado:</label>
+
+                <select name="estado" id="dropdown" required>
+                    <option value="" disabled selected>Selecione seu estado</option>
+                    <option value="AC">Acre</option>
+                    <option value="AL">Alagoas</option>
+                    <option value="AP">Amapá</option>
+                    <option value="AM">Amazonas</option>
+                    <option value="BA">Bahia</option>
+                    <option value="CE">Ceará</option>
+                    <option value="DF">Distrito Federal</option>
+                    <option value="ES">Espírito Santo</option>
+                    <option value="GO">Goiás</option>
+                    <option value="MA">Maranhão</option>
+                    <option value="MT">Mato Grosso</option>
+                    <option value="MS">Mato Grosso do Sul</option>
+                    <option value="MG">Minas Gerais</option>
+                    <option value="PA">Pará</option>
+                    <option value="PB">Paraíba</option>
+                    <option value="PR">Paraná</option>
+                    <option value="PE">Pernambuco</option>
+                    <option value="PI">Piauí</option>
+                    <option value="RJ">Rio de Janeiro</option>
+                    <option value="RN">Rio Grande do Norte</option>
+                    <option value="RS">Rio Grande do Sul</option>
+                    <option value="RO">Rondônia</option>
+                    <option value="RR">Roraima</option>
+                    <option value="SC">Santa Catarina</option>
+                    <option value="SP">São Paulo</option>
+                    <option value="SE">Sergipe</option>
+                    <option value="TO">Tocantins</option>
+
+                </select> <br>
+
+                <label for="interesses">
+                    Quais são seus interesses?</label><br>
+                        <label>
+                            <input type="checkbox" name="interesses" value="tecnologia">
+                            Tecnologia
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="interesses" value="esportes">
+                            Esportes
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="interesses" value="musica">
+                            Música
+                        </label><br>
+                        <label>
+                            <input type="checkbox" name="interesses" value="viagem">
+                            Viagem
+                        </label>
+                <br>
+
+            <label for="comentarios">Comentarios Finais:</label><br>
+
+                <textarea name="comentarios"></textarea><br>
+
+            <button id="submit">Enviar!</button>
+
+        </form>
+    </body>
+</html>
