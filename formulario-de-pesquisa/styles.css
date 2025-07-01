@@ -72,3 +72,15 @@ input[type="submit"] {
   border-radius: 4px;
   cursor: pointer;
 }   
+
+footer {
+  text-align: center;
+  margin: 20px 0;
+  font-size: 0.9em;
+  color: #777;
+}
+
+a {
+  color: #3498db;
+  text-decoration: none;
+}
