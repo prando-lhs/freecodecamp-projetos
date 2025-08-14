@@ -1,3 +1,4 @@
+console.log("Bem-vindo ao sistema de monitoramento de hidrovias! Atenção: esta é uma versão de demonstração. Criado por Leonardo Henrique Sampaio Prando, Marinheiro-RM2");
 
 /* ===================== Inicialização do mapa ===================== */
 const map = L.map('map', { zoomControl:true }).setView([-22.4955, -48.5715], 13);
@@ -221,3 +222,70 @@ map.on('mousemove', function(e) {
 map.on('click', function(e) {
     alert(`Coordenadas clicadas:\nLat: ${e.latlng.lat.toFixed(6)}, Lng: ${e.latlng.lng.toFixed(6)}`);
 });
+
+/* ===================== GPS com atualização automática ===================== */
+
+if (navigator.geolocation) {
+    // Ícone azul simples
+    const userIcon = L.divIcon({
+        html: '<div style="width:14px;height:14px;border-radius:50%;background:#007bff;border:2px solid white"></div>',
+        className: '',
+        iconSize: [14, 14]
+    });
+
+    // Cria marcador vazio
+    let userMarker = L.marker([0, 0], { icon: userIcon }).addTo(map);
+
+    navigator.geolocation.watchPosition(
+        (pos) => {
+            const lat = pos.coords.latitude;
+            const lng = pos.coords.longitude;
+            userMarker.setLatLng([lat, lng]); // Atualiza somente o ponto
+        },
+        (err) => {
+            console.error("Erro ao obter localização:", err);
+            alert("Não foi possível acessar o GPS.");
+        },
+        {
+            enableHighAccuracy: true,
+            maximumAge: 0,
+            timeout: 5000
+        }
+    );
+} else {
+    alert("Seu navegador não suporta geolocalização.");
+}
+
+// Correção de Mapa
+
+// Defina a projeção SIRGAS2000 UTM zone 22S (31982) — proj4 aceita essa definição
+proj4.defs("EPSG:31982","+proj=utm +zone=22 +south +datum=SIRGAS2000 +units=m +no_defs");
+
+// função que detecta se um ponto parece ser UTM
+function looksLikeUTM(x,y){
+  if (typeof x !== 'number' || typeof y !== 'number') return false;
+  return (x > 100000 && x < 1000000) && (y > 6000000 && y < 8000000); // limites gerais para UTM BR
+}
+
+// converte uma lista boiasUtm com campos ex/northing para lat/lng
+function convertUtmList(list, eastKey='easting', northKey='northing', zone='22S'){
+  const converted = [];
+  list.forEach(it=>{
+    const ex = parseNum(it[eastKey] ?? it.ex ?? it.x);
+    const ny = parseNum(it[northKey] ?? it.ny ?? it.y);
+    if (looksLikeUTM(ex, ny)) {
+      try {
+        // proj4(from, to, [E, N]) -> returns [lon, lat]
+        const [lon, lat] = proj4('EPSG:31982','EPSG:4326',[ex, ny]);
+        converted.push(Object.assign({}, it, { lat: lat, lng: lon }));
+      } catch(e){
+        console.error('Erro ao converter UTM:', e, it);
+      }
+    } else {
+      // manter como está (poderá ser processado por normalizePoint)
+      const n = normalizePoint(it);
+      if (n) converted.push(Object.assign({}, it, { lat: n.lat, lng: n.lng }));
+    }
+  });
+  return converted;
+}
