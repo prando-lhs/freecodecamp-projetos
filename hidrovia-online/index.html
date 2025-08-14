@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Protótipo – Waze da Hidrovia (Boias no rio)</title>
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<aside>
+  <header>
+    <h1>Protótipo — Boias no leito</h1>
+    <div class="muted" style="margin-top:4px">Trecho: Barra Bonita — Jaú (aprox.)</div>
+  </header>
+
+  <div class="group">
+    <div class="tip"><b>Observação:</b> as posições das boias são <u>aproximações</u>. Use os dados oficiais SIRGAS2000/UTM para precisão operacional.</div>
+    <div class="note">As boias foram ajustadas automaticamente para o ponto mais próximo sobre a linha do canal (snap).</div>
+  </div>
+
+  <div class="group">
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button id="btnBoias" class="btn btn-primary">Boias: mostrar/ocultar</button>
+      <button id="btnRelatos" class="btn">Relatos: mostrar/ocultar</button>
+      <button id="btnAdd" class="btn">Ativar modo de adição</button>
+      <button id="btnSnap" class="btn">Re-snap boias (forçar)</button>
+    </div>
+    <div class="hr"></div>
+    <div class="legend">
+      <div><span class="dot green"></span> Boia em bom estado</div>
+      <div><span class="dot red"></span> Boia com problema</div>
+      <div><span class="dot amber"></span> Perigo / anomalia</div>
+      <div><span class="dot blue"></span> Posição simulada do usuário (centro do mapa)</div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="tip"><b>Adicionar relato</b><br>Ative o modo e clique no mapa; preencha o formulário.</div>
+    <div style="margin-top:8px">
+      <div id="formWrap" style="display:none">
+        <div class="tip">Local selecionado: <span id="selLatLng">-</span></div>
+        <div style="margin-top:8px"><select id="tipo"><option value="BOIA_DANIFICADA">Boia danificada</option><option value="PERIGO">Perigo</option><option value="ANOMALIA">Anomalia</option></select>
+        <select id="gravidade"><option value="BAIXA">Baixa</option><option value="MEDIA">Média</option><option value="ALTA">Alta</option></select></div>
+        <div style="margin-top:8px"><input id="titulo" placeholder="Título (ex.: luz inoperante)" style="width:100%"></div>
+        <div style="margin-top:8px"><textarea id="descricao" rows="3" placeholder="Descrição (opcional)" style="width:100%"></textarea></div>
+        <div style="display:flex;gap:8px;margin-top:8px"><button id="btnSalvar" class="btn btn-primary">Salvar</button><button id="btnCancelar" class="btn">Cancelar</button></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="group">
+    <div class="tip">Camada de referência: <b>ESRI World Imagery</b> (satélite) para validar visualmente.</div>
+    <div class="hr"></div>
+    <div class="tip">Se desejar, posso importar o arquivo oficial (CSV/SHAPE/KML) e reproduzir as boias com precisão SIRGAS2000.</div>
+  </div>
+
+</aside>
+
+<div id="map"></div>
+<div id="coords" 
+     style="position:absolute; bottom:10px; left:10px; background:rgba(255,255,255,0.85); 
+            padding:5px 10px; border-radius:5px; font-family:Arial,sans-serif; font-size:14px; 
+            box-shadow:0px 0px 5px rgba(0,0,0,0.3); z-index:1000;">
+    Lat: -- , Lng: --
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
