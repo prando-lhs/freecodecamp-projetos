@@ -19,6 +19,8 @@ const canalCoords = [
   [-22.5250, -48.5930]
 ];
 
+
+
 const canalLine = L.polyline(canalCoords, { color:'#1e90ff', weight:5, opacity:0.5 }).addTo(map);
 
 /* posição do usuário simulada = centro do mapa */
@@ -28,12 +30,13 @@ map.on('move', ()=> userMarker.setLatLng(map.getCenter()));
 
 /* ===================== dados de boias (aproximações) ===================== */
 /* Estas coordenadas iniciais são aproximações; em seguida aplicamos snap para o canal */
+
 let boiasAprox = [
-  { id:'BCE-155', nome:'BCE-155', tipo:'BB', estado:'Boa', lat:-22.4945, lng:-48.5578 },
-  { id:'BCV-158', nome:'BCV-158', tipo:'EB', estado:'Boa', lat:-22.5010, lng:-48.5658 },
-  { id:'BCV-158A', nome:'BCV-158A', tipo:'EB', estado:'Boa', lat:-22.5082, lng:-48.5739 },
-  { id:'B-BB-10', nome:'BB-10', tipo:'BB', estado:'Boa', lat:-22.5150, lng:-48.5820 },
-  { id:'B-ESP-01', nome:'ESP-01', tipo:'ESP', estado:'Boa', lat:-22.4852, lng:-48.5482 }
+  { id:'BCE-155', nome:'BCE-155', tipo:'BB', estado:'Boa', lat:-22.501010, lng:-48.569022 },
+  { id:'BCV-158', nome:'BCV-158', tipo:'EB', estado:'Boa', lat:-22.501099, lng:-48.570299 },
+  { id:'BCV-158A', nome:'BCV-158A', tipo:'EB', estado:'Boa', lat:-22.501971, lng:-48.573647 },
+  { id:'B-BB-10', nome:'BB-10', tipo:'BB', estado:'Boa', lat:-22.502606, lng:-48.575277 },
+  { id:'B-ESP-01', nome:'ESP-01', tipo:'ESP', estado:'Boa', lat:-22.503696, lng:-48.579741 }
 ];
 
 // carregar relatos do localStorage (mantemos protótipo)
